@@ -15,7 +15,7 @@ In functia calculateAccesiblePopulation pentru orasul i se calculeaza dintre ora
 
 Atunci cand se ajunge ca distanta dintre un oras i si un oras din intervalul i + 1 la N este mai mare de cat kmRange, nu se vor mai calcula distantele cu orasele ramase, pentru ca ele sunt sortate crescator dupa latitudine si longitudine si distanta va fi din ce in ce mai mare.
 
-Checker output on Tesla A100 engine: \\
+Checker output on Tesla A100 engine: \n
 Executing tests on A100 with timeout: 18s 
 The elapsed time is 1.140000 seconds 
 The elapsed time is 0.090000 seconds 
