@@ -1,6 +1,6 @@
 # Accesible population
 
-For a list of cities the accessible population of each city is calculated. The accessible population of a city is represented by the population of cities that are at the maximum distance from the city.
+In this program for a list of cities is calculated the accessible population of each city. The accessible population of a city is the sum of the populations of cities that are at a distance less than or equal to the given parameter.
 
  ## help.cpp
 
@@ -11,14 +11,14 @@ cityInfo structure is used to store information about cities:
 - population;
 - accessible population;
 
-The sampleFileIO function reads the data from the file and stores it in the array of cityInfo structures. Then the cities are sorted in in ascending order by latitude and longitude. The data is transmitted to calculate the accessible population. The cities are brought to their initial order and their accessible population is written in the output file.
+The sampleFileIO function reads the data from the file and stores it in the array of cityInfo structures. Then the cities are sorted in ascending order by latitude and longitude. The data is transmitted to calculate the accessible population. The cities are brought to their initial order and their accessible population is written in the output file.
 
 
 ## accesible_population.cu
 
-The processCityData function allocates host and device vectors to store, latitude, longitude, population and accessible population for cities. Data from device vectors is processed by the calculateAccessiblePopulation function. The accessible population is copied in the structure that contains the data about the cities.
+The processCityData function allocates host and device vectors to store, latitude, longitude, population and accessible population for cities. Data from device vectors are processed by the calculateAccessiblePopulation function. The accessible population is copied in the structure that contains the data about the cities.
 
-In the function calculatedAccesiblePopulation for city i it is calculated distance with cities between i + 1 and N. Thus for the first city with i = 0 the distance with all cities from 1 to N is calculated. For the second city with i = 1 , there is no need to calculate the distance between it and the first city, we did it before, we will calculate the distance between it and the cities from 2 to N. When the distance between 2 cities A and B is less than or equal to kmrange then we have accpopA + = popB, respectively accpopB + = popA.
+In the function calculatedAccesiblePopulation for city i it is calculated distance with cities between i + 1 and N. So, for the first city with i = 0 the distance with all cities from 1 to N is calculated. For the second city with i = 1 , there is no need to calculate the distance between it and the first city, we did it before, we will calculate the distance between it and the cities from 2 to N. When the distance between 2 cities A and B is less than or equal to kmrange then we have accpopA + = popB, respectively accpopB + = popA.
 
 When the distance between a city i and a city in the range i + 1 to N is greater than kmRange, the distances with the remaining cities will no longer be calculated, because they are sorted ascending by latitude and longitude and the distance will be bigger and bigger.
 
@@ -76,7 +76,7 @@ H1 Passed .... 20p
 Final score: 90/90
 
 
-Tthe execution time increases as the number of data increases. Let's take as an example the input file B0.in which has almost 10000 lines and the file H1.in which has about 1000000 lines, the number of data has increased 100 times, and the execution time 30 times. I consider it a good result, because the execution time does not increase in the same rhythm with the number of data.
+The execution time increases as the number of data increases. Let's take as an example the input file B0.in which has almost 10000 lines and the file H1.in which has approximative 1000000 lines. the number of data has increased 100 times, and the execution time 30 times. I consider it a good result, because the execution time does not increase in the same rhythm with the number of data.
 
-You can see the input files in folder test. Also you have a checker for linux in checker folder.
+You can see the input files in folder test. Also you have a checker for Linux in checker folder.
 
