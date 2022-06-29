@@ -1,24 +1,26 @@
-# accesible_population
+# Accesible population
+
+For a list of cities the accessible population of each city is calculated. The accessible population of a city is represented by the population of cities that are at the maximum distance from the city.
+
+ ## help.cpp
+
+cityInfo structure is used to store information about cities:
+- city id;
+- latitude;
+- longitude;
+- population;
+- accessible population;
+
+The sampleFileIO function reads the data from the file and stores it in the array of cityInfo structures. Then the cities are sorted in in ascending order by latitude and longitude. The data is transmitted to calculate the accessible population. The cities are brought to their initial order and their accessible population is written in the output file.
 
 
-Fisierul help.cpp
+## accesible_population.cu
 
-Structura cityInfo, este folosita pentru a stoca informatiile despre orase:
-- id-ul orasului;
-- latitudine; 
-- longitudine;
-- populatie;
-- populatia accesibila;
+The processCityData function allocates host and device vectors to store, latitude, longitude, population and accessible population for cities. Data from device vectors is processed by the calculateAccessiblePopulation function. The accessible population is copied in the structure that contains the data about the cities.
 
-In functia sampleFileIO se citest datele din fisier si se stocheaza in structura cityInfo. Apoi orasele sunt sortate crescator dupa latitudine si longitudine. Datele sunt transmise pentru a calcula populatia accesibila. Orasele sunt aduse la ordinea lor initiala si se scrie in fisierul de output populatia accesibila a acestora.
+In the function calculatedAccesiblePopulation for city i it is calculated distance with cities between i + 1 and N. Thus for the first city with i = 0 the distance with all cities from 1 to N is calculated. For the second city with i = 1 , there is no need to calculate the distance between it and the first city, we did it before, we will calculate the distance between it and the cities from 2 to N. When the distance between 2 cities A and B is less than or equal to kmrange then we have accpopA + = popB, respectively accpopB + = popA.
 
-Fisierul accesible_population.cu
-
-In functia processCityData se aloca vectori host si device pentru a stoca, latitudinea, longitudinea, populatia si populatia accesibila pentru orase. Datele din vectorii device sunt procesate de functia calculateAccesiblePopulation. Populatia accesibila este copiata in structura ce contine datele despre orase.
-
-In functia calculateAccesiblePopulation pentru orasul i se calculeaza dintre orasul i si toate orasele de la i + 1 la N. Astfel pentru primul oras cu i = 0 se calculeaza distanta cu toate orasele de la 1 la N. Pentru al doilea oras cu i = 1, nu e nevoie sa calculam care e distanta dintre el si primul oras, am facut-o anterior, vom calcula distanta dintre el si orasele de la 3 la N.
-
-Atunci cand se ajunge ca distanta dintre un oras i si un oras din intervalul i + 1 la N este mai mare de cat kmRange, nu se vor mai calcula distantele cu orasele ramase, pentru ca ele sunt sortate crescator dupa latitudine si longitudine si distanta va fi din ce in ce mai mare.
+When the distance between a city i and a city in the range i + 1 to N is greater than kmRange, the distances with the remaining cities will no longer be calculated, because they are sorted ascending by latitude and longitude and the distance will be bigger and bigger.
 
 Checker output on Tesla A100 engine:
 
@@ -74,6 +76,7 @@ H1 Passed .... 20p
 Final score: 90/90
 
 
-Se observa ca timpul de executie creste pe masura ce creste si numarul de date. Sa luam ca exemplu fisierul de input B0.in care are aproape 10000 de linii si fiesul H1.in care are aproximativ 1000000, numarul de date a cresut de 100 de ori, iar durata de exutie de 30 de ori. Consider ca este un rezultat bun, pentru ca durata de executie nu creste in acelasi ritm cu numarul de date.
+Tthe execution time increases as the number of data increases. Let's take as an example the input file B0.in which has almost 10000 lines and the file H1.in which has about 1000000 lines, the number of data has increased 100 times, and the execution time 30 times. I consider it a good result, because the execution time does not increase in the same rhythm with the number of data.
 
-Timpii de executie de pe cluster sunt de 10 ori mai mici, pe A100.
+You can see the input files in folder test. Also you have a checker for linux in checker folder.
+
