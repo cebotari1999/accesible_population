@@ -23,8 +23,11 @@ In the function calculatedAccesiblePopulation for city i it is calculated distan
 When the distance between a city i and a city in the range i + 1 to N is greater than kmRange, the distances with the remaining cities will no longer be calculated, because they are sorted ascending by latitude and longitude and the distance will be bigger and bigger.
 
 Checker output on Tesla A100 engine:
+
 Executing tests on A100 with timeout: 18s 
+
 The elapsed time is 1.140000 seconds 
+
 The elapsed time is 0.090000 seconds 
 
 The elapsed time is 0.330000 seconds 
